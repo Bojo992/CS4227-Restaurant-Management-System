@@ -2,6 +2,7 @@
 
 import { NavBar } from "@/app/components/navbar/foodBar"
 import { useState } from "react"
+import { Button } from "@mui/material"
 
 const colourMapping: { [key: string]: string } = {
   main: "bg-red-300",
@@ -73,7 +74,7 @@ export function TakeOrder() {
           )
         })}
       </div>
-
+      <div>
       <div className="w-1/4 border p-4 rounded-lg">
         <h2 className="text-lg font-bold mb-2 underline">Selected Foods</h2>
         <ul>
@@ -89,6 +90,10 @@ export function TakeOrder() {
             </li>
           ))}
         </ul>
+      </div>
+      <div>
+        <Button>Create Order</Button>
+      </div>
       </div>
     </div>
   );
