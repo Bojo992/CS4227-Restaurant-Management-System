@@ -1,5 +1,6 @@
 'use client'
 
+import { NavBar } from "@/app/components/navbar/foodBar"
 import { useState } from "react"
 
 const colourMapping: { [key: string]: string } = {
@@ -24,8 +25,16 @@ const food = [
   { id: 10, name: "Brownie", type: "dessert", price: "6"},
   { id: 11, name: "Rice", type: "side", price: "3"},
 ]
+export default function TakeOrderPage() {
+  return (
+      <div>
+        <NavBar />
+        <TakeOrder />
+      </div>
+  )
+}
 
-export default function TakeOrder() {
+export function TakeOrder() {
   const [selectedFoods, setSelectedFoods] = useState<{ [key: string]: number }>({})
 
   const addItem = (food: string) => {
