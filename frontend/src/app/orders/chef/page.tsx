@@ -82,7 +82,7 @@ export function ChefSection() {
         );
       };
 
-    const finishOrder = (orderID: number) => {
+    const finishOrder = (orderID: number | null) => {
         // Create Reciept
     }
 
@@ -145,7 +145,8 @@ export function ChefSection() {
                         {/* Button Div */}
                         {isEverythingCooked && (
                         <div className="m-2 flex justify-center">
-                            <button className="bg-red-400 py-2 px-4 rounded-lg">
+                            <button className="bg-red-400 py-2 px-4 rounded-lg"
+                            onClick={() => finishOrder(orderID)}>
                                 Mark Order as Cooked
                             </button>
                         </div>
