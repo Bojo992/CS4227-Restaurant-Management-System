@@ -87,6 +87,7 @@ export function ChefSection() {
     }
 
     const selectedOrder = orders.find((order) => order.id === orderID);
+    const isEverythingCooked = selectedOrder && selectedOrder.items.every((item) => item.quantity === 0);
 
     return (
         <div>
@@ -105,8 +106,8 @@ export function ChefSection() {
                     {/* Order List */}
                     <div className="w-1/3">
                         <h1 className="text-center text-lg font-bold underline">Order List</h1>
-                        {selectedOrder ? (
-                            selectedOrder.items.some((item) => item.quantity > 0) ? (
+                        {selectedOrder && (
+                            selectedOrder.items.some((item) => item.quantity > 0) && (
                                 <ul className="space-y-2">
                                     {selectedOrder.items.map((item, idx) =>
                                         item.quantity > 0 ? (
@@ -121,11 +122,7 @@ export function ChefSection() {
                                         ) : null
                                     )}
                                 </ul>
-                            ) : (
-                                <p className="text-center mt-4">All items are cooked!</p>
                             )
-                        ) : (
-                            <p className="text-center mt-4">No order selected.</p>
                         )}
                     </div>
 
@@ -134,7 +131,7 @@ export function ChefSection() {
                         {/* List */}
                         <div className="">
                             <h1 className="text-center text-lg font-bold underline">Cooked List</h1>
-                            {selectedOrder && selectedOrder.cookedItems.length > 0 ? (
+                            {selectedOrder && selectedOrder.cookedItems.length > 0 && (
                                 <ul className="space-y-2">
                                     {selectedOrder.cookedItems.map((food, idx) => (
                                         <li key={idx}
@@ -143,14 +140,16 @@ export function ChefSection() {
                                         </li>
                                     ))}
                                 </ul>
-                            ) : (<p>Nothing</p>)}
+                            )}
                         </div>
                         {/* Button Div */}
+                        {isEverythingCooked && (
                         <div className="m-2 flex justify-center">
                             <button className="bg-red-400 py-2 px-4 rounded-lg">
                                 Mark Order as Cooked
                             </button>
                         </div>
+                        )}
                     </div>
                 </div>
             </div>
