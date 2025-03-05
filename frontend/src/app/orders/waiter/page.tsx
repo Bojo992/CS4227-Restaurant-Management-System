@@ -36,7 +36,7 @@ const colourMapping: { [key: string]: string } = {
 
 
 
-export function WaiterSection() {
+function WaiterSection() {
     const [selectedFoods, setSelectedFoods] = useState<{ [key: string]: number }>({})
 
     const addFoodToList = (food: string) => {

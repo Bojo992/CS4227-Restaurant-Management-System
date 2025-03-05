@@ -26,6 +26,7 @@ interface Order {
     }[]
 }
 
+// HARD CODED EXAMPLES
 const sampleOrders: Order[] = [
     {
         id: 0, items: [
@@ -52,7 +53,7 @@ const sampleOrders: Order[] = [
     },
 ]
 
-export function ChefSection() {
+function ChefSection() {
 
     const [orders, setOrders] = useState<Order[]>(sampleOrders);
     const [orderID, setOrderID] = useState<number | null>(null);
