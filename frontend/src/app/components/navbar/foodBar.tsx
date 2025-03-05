@@ -28,6 +28,12 @@ export function NavBar() {
                 </Button>
                 : <></>}
 
+            {isStaffHighLevel() ?
+                <Button variant="contained" onClick={() => router.push('/payment')}>
+                    Payment and Inventory
+                </Button>
+                : <></>}
+
 
         </div>
     )
