@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@AllArgsConstructor
 @RestController("/staff")
+@AllArgsConstructor
 public class StaffController {
-    private final StaffService staffService;
+    private StaffService staffService;
 
     @PostMapping("/add")
     public ResponseEntity<Object> addStaff(@RequestBody Staff staff){

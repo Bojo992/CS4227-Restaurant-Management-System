@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>cs4227.restaurant.microservices</groupId>
+        <artifactId>parent-microservices</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>cs4337.restaurant.microservices</groupId>
+
     <artifactId>staff</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>staff</name>
@@ -42,6 +42,12 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.2.224</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>4.1.5</version>
         </dependency>
     </dependencies>
 
