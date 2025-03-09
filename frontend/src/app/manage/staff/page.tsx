@@ -4,7 +4,8 @@ import Roster from "@/app/manage/staff/roster";
 import NewStaffModal from "@/app/manage/staff/newStaffModal";
 import {NavBar} from "@/app/components/navbar/foodBar";
 import ManageNav from "@/app/manage/ManageNav";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function ManagePage() {
 
@@ -19,6 +20,16 @@ export default function ManagePage() {
         {name: "Johnny Bravo7", role: "HIGH", rate: "23.45", hours: "40"},
     ]);
 
+    useEffect( () => {
+        axios.get('http://localhost:8082/staff/all')
+            .then((response) => {
+                setStaff(response.data);
+            }).catch((error) => {
+                console.error("There was a problem with the request: " + error.message);
+        });
+
+    }, [])
+
     const addStaff = (newStaff: {name: string; role: string; rate: string; hours: string}) => {
         // @ts-ignore
         setStaff((prev) => [...prev, newStaff]);
@@ -26,6 +37,7 @@ export default function ManagePage() {
 
     const deleteStaff = (name: string) => {
         setStaff((prev) => prev.filter((staff) => staff.name !== name));
+        axios.post('http://localhost:8082/staff/delete', {name: name})
     };
 
     return (

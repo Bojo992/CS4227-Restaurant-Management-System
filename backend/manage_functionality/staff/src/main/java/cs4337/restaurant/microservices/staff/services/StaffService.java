@@ -29,7 +29,7 @@ public class StaffService {
     }
 
     public void deleteStaff(StaffDTO staff){
-        this.staffRepository.deleteById(Long.valueOf(staff.getId()));
+        this.staffRepository.deleteByName(staff.getName());
     }
 
     public Staff updateStaff(StaffDTO staff){
