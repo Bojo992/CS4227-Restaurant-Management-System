@@ -33,11 +33,12 @@ export default function ManagePage() {
     const addStaff = (newStaff: {name: string; role: string; rate: string; hours: string}) => {
         // @ts-ignore
         setStaff((prev) => [...prev, newStaff]);
+        axios.post('http://localhost:8082/staff/add', newStaff).then(r => console.log(r));
     };
 
     const deleteStaff = (name: string) => {
         setStaff((prev) => prev.filter((staff) => staff.name !== name));
-        axios.post('http://localhost:8082/staff/delete', {name: name})
+        axios.post('http://localhost:8082/staff/delete', {name: name}).then(r => console.log(r));
     };
 
     return (
