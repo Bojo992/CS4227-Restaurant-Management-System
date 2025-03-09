@@ -1,32 +1,38 @@
 package cs4337.restaurant.microservices.staff.controllers;
 
+import cs4337.restaurant.microservices.staff.StaffDTO;
 import cs4337.restaurant.microservices.staff.entities.Staff;
 import cs4337.restaurant.microservices.staff.services.StaffService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/staff")
-@AllArgsConstructor
+@RestController
+@RequestMapping("/staff")
 public class StaffController {
-    private StaffService staffService;
+    private final StaffService staffService;
+
+    public StaffController(StaffService staffService){
+        this.staffService = staffService;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Object> getAllStaff(){
+        return ResponseEntity.ok(this.staffService.getAllStaff());
+    }
 
     @PostMapping("/add")
-    public ResponseEntity<Object> addStaff(@RequestBody Staff staff){
-        this.staffService.addNewStaff(staff);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Object> addStaff(@RequestBody StaffDTO staff){
+        return ResponseEntity.ok(this.staffService.addNewStaff(staff));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Object> updateStaff(@RequestBody Staff staff){
-        this.staffService.updateStaff(staff);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Object> updateStaff(@RequestBody StaffDTO staff){
+        return ResponseEntity.ok(this.staffService.updateStaff(staff));
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<Object> deleteStaff(@RequestBody Staff staff){
+    public ResponseEntity<Object> deleteStaff(@RequestBody StaffDTO staff){
         this.staffService.deleteStaff(staff);
         return ResponseEntity.ok().build();
     }
