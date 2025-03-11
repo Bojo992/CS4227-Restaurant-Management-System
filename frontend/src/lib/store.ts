@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import staffReducer from "@/lib/features/manage/reducer";
+import staffReducer from "@/lib/features/manage/staffReducer";
 
 export const makeStore = () => {
     return configureStore({

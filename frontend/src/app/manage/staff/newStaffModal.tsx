@@ -1,15 +1,12 @@
 import {Button, MenuItem, Modal, TextField, Typography} from "@mui/material";
 import {Box} from "@mui/system";
 import {useState} from "react";
-import axios from "axios";
-import {API} from "@/api/api";
+import {AppDispatch} from "@/lib/store";
+import {useDispatch} from "react-redux";
+import {addStaff} from "@/lib/features/manage/staffReducer";
 
-export default function NewStaffModal(
-    {
-        addStaff
-    }: {
-        addStaff: (newStaff: { name: string; role: string; rate: string; hours: string }) => void
-    }) {
+export default function NewStaffModal() {
+    const dispatch = useDispatch<AppDispatch>();
     const [open, setOpen] = useState(false);
     const roles = ["HIGH", "LOW"];
     const handleOpen = () => setOpen(true);
@@ -21,7 +18,7 @@ export default function NewStaffModal(
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        addStaff({name, role, rate, hours: "40"});
+        dispatch(addStaff({ name, role, rate, hours: "40" }));
 
         setName("");
         setRole("");

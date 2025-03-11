@@ -11,13 +11,15 @@ import {
 } from "@mui/material";
 import React, {SetStateAction, useState} from "react";
 import axios from "axios";
-import {API} from "@/api/api";
+import {deleteStaff} from "@/lib/features/manage/staffReducer";
+import {AppDispatch} from "@/lib/store";
+import {useDispatch} from "react-redux";
 
 
 export default function Roster(
-    {rows, deleteStaff}: { rows: { name: string; role: string; rate: string; hours: string }[], deleteStaff: (name: string) => void }
+    {rows}: { rows: { name: string; role: string; rate: string; hours: string }[]}
 ) {
-
+    const dispatch = useDispatch<AppDispatch>();
 
 
     const [page, setPage] = useState(0);
@@ -32,11 +34,9 @@ export default function Roster(
         setPage(0);
     };
 
-    const onDeleteStaff = (staffDetails: { name: string; role: string; rate: string; hours: string; }) => {
-        deleteStaff(staffDetails.name);
-        // axios.post(`${API.STAFF}/delete`, staffDetails)
-        //     .then(response => console.log(response))
-        //     .catch(e => console.error(e));
+    const onDeleteStaff = (name: string) => {
+        dispatch(deleteStaff(name));
+        axios.post('http://localhost:8082/staff/delete', { name: name }).then(r => console.log(r));
     }
 
     // @ts-ignore
