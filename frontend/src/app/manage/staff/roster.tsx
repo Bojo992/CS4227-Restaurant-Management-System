@@ -34,9 +34,10 @@ export default function Roster(
         setPage(0);
     };
 
-    const onDeleteStaff = (name: string) => {
-        dispatch(deleteStaff(name));
-        axios.post('http://localhost:8082/staff/delete', { name: name }).then(r => console.log(r));
+    const onDeleteStaff = (state: any) => {
+        dispatch(deleteStaff(state.name));
+        console.log(state);
+        axios.post('http://localhost:8082/staff/delete', { name: state.name }).then(r => console.log(r));
     }
 
     // @ts-ignore
