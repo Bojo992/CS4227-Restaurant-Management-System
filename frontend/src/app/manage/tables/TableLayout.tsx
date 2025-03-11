@@ -1,9 +1,14 @@
 import {useState} from "react";
 import {Button} from "@mui/material";
 import {motion} from "framer-motion";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "@/lib/store";
+import {addTable, deleteTable, clearTables} from "@/lib/features/manage/tableReducer";
 
 export default function TableLayout() {
-    const [tables, setTables] = useState([]);
+    const dispatch = useDispatch();
+    const tables = useSelector((state: RootState) => state.table.tables);
+
     const [tableId, setTableId] = useState(1);
 
     const handleAddTable = (e: any) => {
@@ -14,20 +19,18 @@ export default function TableLayout() {
             y: e.clientY - rect.top,
         };
         setTableId(tableId + 1);
-        // @ts-ignore
-        setTables([...tables, newTable]);
+        dispatch(addTable(newTable));
     };
 
     const handleDeleteTable = (id: number) => {
-        // @ts-ignore
-        setTables(tables.filter((table) => table.id !== id));
+        dispatch(deleteTable(id));
     }
 
     return (
         <div className={"h-screen"}>
             <div className={"flex"}>
 
-                <Button variant="outlined" className="" onClick={() => setTables([])}>Reset</Button>
+                <Button variant="outlined" className="" onClick={() => dispatch(clearTables())}>Reset</Button>
                 <div className={"flex flex-row items-center"}>
                     <div>Table Id:</div>
                     <input type="number" className={"text-black"} value={tableId} onChange={(e) => {
