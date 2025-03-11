@@ -10,12 +10,15 @@ import {
     TablePagination,
     TableRow
 } from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteMenuItem} from "@/lib/features/manage/menuReducer";
+import {RootState} from "@/lib/store";
 
-export default function MenuTable({rows, handleOnDelete}: { rows: { name: string; img: string | null; price: string; cost: string; quantity: string }[],
-                                  handleOnDelete: (name: string) => void; }
-                                  ) {
+export default function MenuTable() {
+    const dispatch = useDispatch();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(3);
+    const menu = useSelector((state: RootState) => state.menu.menu);
 
     const handleChangePage = (event: any, newPage: SetStateAction<number>) => {
         setPage(newPage);
@@ -25,6 +28,10 @@ export default function MenuTable({rows, handleOnDelete}: { rows: { name: string
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    const handleOnDelete = (name: string) => {
+        dispatch(deleteMenuItem(name));
+    }
 
     return (
         <Paper  sx={{ width: "100%", overflow: "hidden", marginTop: 2 }}>
@@ -40,9 +47,9 @@ export default function MenuTable({rows, handleOnDelete}: { rows: { name: string
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows
+                        {menu
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => (
+                            .map((row: { name: string; img: string | null; price: string; cost: string, quantity: string }) => (
                                 <TableRow key={row.name}>
                                     <TableCell>{row.name}</TableCell>
                                     {/* @ts-ignore */}
@@ -59,7 +66,7 @@ export default function MenuTable({rows, handleOnDelete}: { rows: { name: string
             <TablePagination
                 rowsPerPageOptions={[3, 5, 10]}
                 component="div"
-                count={rows.length}
+                count={menu.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

@@ -1,10 +1,11 @@
 import {useState} from "react";
 import {Button, MenuItem, Modal, TextField, Typography} from "@mui/material";
 import {Box} from "@mui/system";
+import {useDispatch} from "react-redux";
+import {addMenuItem} from "@/lib/features/manage/menuReducer";
 
-export default function NewFoodModal({addFood}: {
-    addFood: (food: { name: string; img: string | null; price: string; cost: string; quantity: string; }) => void;
-}) {
+export default function NewFoodModal() {
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -15,10 +16,11 @@ export default function NewFoodModal({addFood}: {
     const [hyperlink, setHyperlink] = useState<string>("");
 
 
+
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        addFood({name, img: hyperlink || null, price, cost, quantity: "0"});
+        dispatch(addMenuItem({ name, img: hyperlink || null, price, cost, quantity: "0" }));
 
         setName("");
         setPrice("");

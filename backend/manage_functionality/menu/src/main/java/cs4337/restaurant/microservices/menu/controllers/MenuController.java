@@ -1,7 +1,7 @@
 package cs4337.restaurant.microservices.menu.controllers;
 
 import cs4337.restaurant.microservices.menu.entities.MenuEntity;
-import cs4337.restaurant.microservices.menu.services.MenuServie;
+import cs4337.restaurant.microservices.menu.services.MenuService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController("/menu")
 public class MenuController {
-    private MenuServie menuService;
+    private MenuService menuService;
 
     @GetMapping("/all")
     public ResponseEntity<Object> getAllMenu(){
@@ -19,7 +19,7 @@ public class MenuController {
     }
 
     @GetMapping("/add")
-    public ResponseEntity<Object> addMenu(@RequestBody("menu") MenuEntity menu){
+    public ResponseEntity<Object> addMenu(@RequestBody MenuEntity menu){
         this.menuService.addNewMenu();
         return ResponseEntity.ok().build();
     }
