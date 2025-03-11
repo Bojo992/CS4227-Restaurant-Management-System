@@ -2,10 +2,15 @@ import { configureStore } from '@reduxjs/toolkit'
 import staffReducer from "@/lib/features/manage/staffReducer";
 import menuReducer from "@/lib/features/manage/menuReducer";
 import tableReducer from "@/lib/features/manage/tableReducer";
+import orderReducer from "@/lib/features/orders/orderReducer";
 
 export const makeStore = () => {
     return configureStore({
-        reducer: {staff: staffReducer, menu: menuReducer, table: tableReducer},
+        reducer: {
+            staff: staffReducer, 
+            menu: menuReducer, 
+            table: tableReducer,
+            order: orderReducer,},
     })
 }
 

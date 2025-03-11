@@ -2,6 +2,10 @@
 
 import { NavBar } from "@/app/components/navbar/foodBar";
 import { useState } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import { addItem } from "@/lib/features/orders/orderReducer";
+import { removeItem } from "@/lib/features/orders/orderReducer";
+import {RootState} from "@/lib/store";
 
 export default function DisplayWaiterPage() {
     return (
@@ -37,25 +41,16 @@ const colourMapping: { [key: string]: string } = {
 
 
 export function WaiterSection() {
+    const dispatch = useDispatch();
     const [selectedFoods, setSelectedFoods] = useState<{ [key: string]: number }>({})
 
-    const addFoodToList = (food: string) => {
-        setSelectedFoods((foodList) => ({
-            ...foodList,
-            [food]: (foodList[food] || 0) + 1
-        }))
-    };
+    const orderList = useSelector((state: RootState) => state.order.items)
 
-    const removeFoodFromList = (food: string) => {
-        setSelectedFoods((foodList) => {
-            const foods = { ...foodList };
-            if (foods[food] > 1) {
-                foods[food] -= 1;
-            } else {
-                delete (foods[food]);
-            }
-            return foods;
-        })
+    const handleAddFood = (id: number, name: string, type: string, price: string, quantity: number) => {
+        dispatch(addItem({id, name, type, price, quantity}))
+    }
+    const handleDeleteFood = (id: number) => {
+        dispatch(removeItem(id))
     }
 
     const createOrder = () => {
@@ -72,7 +67,7 @@ export function WaiterSection() {
                         return (
                             <div key={food.id}
                                 className={`border rounded-lg p-4  min-h-30 h-30 flex items-center justify-center ${bgColour}`}
-                                onClick={() => addFoodToList(food.name)}>
+                                onClick={() => handleAddFood(food.id, food.name, food.price, food.type, 1)}>
                                 <p className="text-center">{food.name}</p>
                             </div>
                         )
@@ -85,18 +80,18 @@ export function WaiterSection() {
                         <h1 className="text-lg font-bold text-center underline">
                             Selected Items</h1>
                         <ul>
-                            {Object.entries(selectedFoods).map(([food, count]) => (
-                                <li
-                                    className="m-2 flex items-center justify-between"
-                                    key={food}>
-                                    {food} x{count}
-                                    <button
-                                        className="bg-red-500 rounded p-2 text-white"
-                                        onClick={() => removeFoodFromList(food)}>
-                                        Remove
-                                    </button>
-                                </li>
-                            ))}
+                            {
+                                orderList.map((item) => (
+                                    <li key={item.id}
+                                    className="m-2 flex items-center justify-between">
+                                        {item.name} x{item.quantity}
+                                        <button
+                                            className="bg-red-500 rounded p-2 text-white"
+                                            onClick={() => dispatch(removeItem(item.id))}>
+                                            Remove
+                                        </button>
+                                    </li>
+                                ))}
                         </ul>
                     </div>
                     {/* Button */}
