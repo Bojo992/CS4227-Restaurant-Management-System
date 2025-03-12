@@ -3,6 +3,7 @@ import staffReducer from "@/lib/features/manage/staffReducer";
 import menuReducer from "@/lib/features/manage/menuReducer";
 import tableReducer from "@/lib/features/manage/tableReducer";
 import orderReducer from "@/lib/features/orders/orderReducer";
+import chefReducer from "@/lib/features/orders/chefReducer";
 
 export const makeStore = () => {
     return configureStore({
@@ -10,7 +11,8 @@ export const makeStore = () => {
             staff: staffReducer, 
             menu: menuReducer, 
             table: tableReducer,
-            order: orderReducer,},
+            order: orderReducer,
+            chef: chefReducer,},
     })
 }
 

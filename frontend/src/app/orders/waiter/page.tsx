@@ -42,7 +42,6 @@ const colourMapping: { [key: string]: string } = {
 
 export function WaiterSection() {
     const dispatch = useDispatch();
-    const [selectedFoods, setSelectedFoods] = useState<{ [key: string]: number }>({})
 
     const orderList = useSelector((state: RootState) => state.order.items)
 
