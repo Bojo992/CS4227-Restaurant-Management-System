@@ -40,7 +40,7 @@ const colourMapping: { [key: string]: string } = {
 
 
 
-export function WaiterSection() {
+function WaiterSection() {
     const dispatch = useDispatch();
 
     const orderList = useSelector((state: RootState) => state.order.items)

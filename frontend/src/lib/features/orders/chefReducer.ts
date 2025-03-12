@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface orderList {
     order: Array<{
         id: number,
+        isComplete: boolean,
         items: Array<{id: number, name: string, type: string, price: string, quantity: number}>,
         cookedItems: Array<{id: number, name: string, type: string, price: string, quantity: number}>
     }>
@@ -11,21 +12,21 @@ interface orderList {
 const initialState: orderList = {
     order: [
         {
-            id: 0, items: [
+            id: 0, isComplete: false, items: [
                 { id: 0, name: "Burger", type: "main", price: "10", quantity: 2, },
                 { id: 1, name: "Fries", type: "side", price: "4", quantity: 1, },
                 { id: 4, name: "Coke", type: "drink", price: "2", quantity: 1, },
             ], cookedItems: []
         },
         {
-            id: 1, items: [
+            id: 1, isComplete: false, items: [
                 { id: 0, name: "Burger", type: "main", price: "10", quantity: 2, },
                 { id: 1, name: "Fries", type: "side", price: "4", quantity: 1, },
                 { id: 4, name: "Coke", type: "drink", price: "2", quantity: 1, },
             ], cookedItems: []
         },
         {
-            id: 2, items: [
+            id: 2, isComplete: false, items: [
                 { id: 0, name: "Burger", type: "main", price: "10", quantity: 2, },
                 { id: 1, name: "Fries", type: "side", price: "4", quantity: 1, },
                 { id: 4, name: "Coke", type: "drink", price: "2", quantity: 1, },
@@ -63,10 +64,17 @@ const chefSlice = createSlice({
                     }
                 }
             }
+        },
+        markAsComplete: (state, action: PayloadAction<{orderId: number}>) => {
+            const order = state.order.find((order) => order.id === action.payload.orderId);
+            if (order) {
+                order.isComplete = true;
+            }
         }
+
     }
 })
 
-export const {markAsCooked} = chefSlice.actions;
+export const {markAsCooked, markAsComplete} = chefSlice.actions;
 
 export default chefSlice.reducer;

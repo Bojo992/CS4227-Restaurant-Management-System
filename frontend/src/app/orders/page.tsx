@@ -13,7 +13,7 @@ export default function OrderPage() {
     )
 }
 
-export function OrderNav() {
+function OrderNav() {
     const router = useRouter();
     return (
         <>

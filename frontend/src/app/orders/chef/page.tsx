@@ -3,7 +3,7 @@
 import { NavBar } from "@/app/components/navbar/foodBar"
 import { useState } from "react"
 import {useDispatch, useSelector} from "react-redux";
-import { markAsCooked } from "@/lib/features/orders/chefReducer";
+import { markAsCooked, markAsComplete } from "@/lib/features/orders/chefReducer";
 import {RootState} from "@/lib/store";
 
 export default function DisplayChefPage() {
@@ -28,11 +28,11 @@ function ChefSection() {
     }
 
     const handleMarkAsComplete = (orderId: number, itemId: number) => {
-        dispatch(markAsCooked({orderId, itemId}))
+        dispatch(markAsCooked({orderId, itemId}));
     }
 
-    const finishOrder = (orderID: number | null) => {
-        // Create Reciept
+    const finishOrder = (orderId: number) => {
+        dispatch(markAsComplete({orderId}))
     }
 
     const selectedOrder = chefList.find((order) => order.id === orderID);
@@ -42,7 +42,7 @@ function ChefSection() {
         <div className="flex flex-col gap-4 p-4">
             {/* Full Page */}
             <div className="flex overflow-x-auto gap-2 border-b pb-4">
-                {chefList.map((order) => (
+                {chefList.filter((order) => order.isComplete === false).map((order) => (
                     <button key={order.id}
                         onClick={() => selectOrder(order.id)}
                         className={`py-2 px-4 ${order.id === orderID ? "bg-blue-200" : "bg-gray-300"} rounded-lg`}>
@@ -94,7 +94,7 @@ function ChefSection() {
                     {isEverythingCooked && (
                         <div className="m-2 flex justify-center">
                             <button className="bg-red-400 py-2 px-4 rounded-lg"
-                                onClick={() => finishOrder(orderID)}>
+                                onClick={() => finishOrder(orderID!)}>
                                 Mark Order as Cooked
                             </button>
                         </div>
