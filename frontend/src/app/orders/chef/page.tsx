@@ -15,23 +15,6 @@ export default function DisplayChefPage() {
     )
 }
 
-interface Order {
-    id: number,
-    items: {
-        id: number, 
-        name: string, 
-        type: string, 
-        price: string, 
-        quantity: number,
-    }[]
-    cookedItems: {
-        id: number, 
-        name: string, 
-        type: string, 
-        price: string, 
-        quantity: number,
-    }[]
-}
 
 function ChefSection() {
 
