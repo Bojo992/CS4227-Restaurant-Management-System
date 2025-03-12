@@ -46,8 +46,21 @@ const chefSlice = createSlice({
             if (order) {
                 const foodItem = order.items.find((item) => item.id === action.payload.itemId);
                 if (foodItem) {
-                    order.cookedItems.push(foodItem);
-                    order.items = order.items.filter((item) => item.id !== foodItem.id);
+                    // If less than 1 remove, otherwise reduce
+                    if (foodItem.quantity < 1) {
+                        order.items = order.items.filter((item) => item.id !== foodItem.id);
+                    } else {
+                        foodItem.quantity -= 1;
+                    }
+
+                    const cookedItem = order.cookedItems.find((item) => item.id === foodItem.id)
+                    if (cookedItem) {
+                        if (cookedItem.quantity > 0) {
+                            cookedItem.quantity += 1;
+                        }
+                    } else {
+                        order.cookedItems.push({...foodItem, quantity: 1})
+                    }
                 }
             }
         }
