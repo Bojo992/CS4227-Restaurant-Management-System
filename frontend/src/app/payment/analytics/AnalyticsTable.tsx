@@ -75,7 +75,7 @@ function Graph({ values }: { values: any[] }) {
     return(
         // <ResponsiveContainer height="100%" width="100%">
         <ResponsiveContainer className="p-5">
-            <LineChart style = "padding = 5px" data={values} margin={{top: 20, right: 30, left: 20, bottom: 5}}>
+            <LineChart data={values} margin={{top: 20, right: 30, left: 20, bottom: 5}}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="date" />
                 <YAxis yAxisId="left" orientation="left" />
