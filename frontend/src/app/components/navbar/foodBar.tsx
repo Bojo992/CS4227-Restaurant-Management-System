@@ -22,6 +22,9 @@ export function NavBar() {
             <Button variant="contained" onClick={() => router.push('/menu')}>
                 Menu
             </Button>
+            <Button variant="contained" onClick={() => router.push('/orders')}>
+                Orders
+            </Button>
             {isStaffHighLevel() ?
                 <Button variant="contained" onClick={() => router.push('/manage')}>
                     Manage

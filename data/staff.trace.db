@@ -238,3 +238,12 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/kmila/I
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 61 more
+2025-03-09 21:40:17.322029Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STAFF" not found (this database is empty); SQL statement:
+insert into staff (hours,name,rate,role,id) values (?,?,?,?,default) [42104-224]
+2025-03-09 21:41:12.810418Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STAFF" not found (this database is empty); SQL statement:
+insert into staff (hours,name,rate,role,id) values (?,?,?,?,default) [42104-224]
+2025-03-09 21:43:55.450537Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STAFF" not found (this database is empty); SQL statement:
+insert into staff (hours,name,rate,role,id) values (?,?,?,?,default) [42104-224]
