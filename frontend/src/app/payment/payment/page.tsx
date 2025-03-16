@@ -5,9 +5,13 @@ import {NavBar} from "@/app/components/navbar/foodBar";
 
 export default function PaymentPage() {
     return (
-        <div>
-            <NavBar />
-            <InventoryNavBar />
+        <div className={"grid grid-cols-1 h-screen w-screen"}>
+            <div className="max-h-fit">
+                <NavBar />
+                <InventoryNavBar />
+            </div>
+            <div className={"h-full p-5"}>
+            </div>
         </div>
 
     )

@@ -6,10 +6,14 @@ import {InventoryManagement} from "@/app/payment/inventory/InventoryManagement";
 
 export default function InventoryPage() {
     return (
-        <div>
-            <NavBar />
-            <InventoryNavBar />
-            <InventoryManagement/>
+        <div className={"grid grid-cols-1 h-screen w-screen"}>
+            <div className="max-h-fit">
+                <NavBar />
+                <InventoryNavBar />
+            </div>
+            <div className={"h-full p-5"}>
+                <InventoryManagement />
+            </div>
         </div>
     )
 }
