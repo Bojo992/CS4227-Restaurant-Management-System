@@ -32,7 +32,7 @@ export default function ReservationListPage() {
         } else {
             const fetchReservations = async () => {
                 try {
-                    const response = await fetch("http://localhost:8080/api/reservations");
+                    const response = await fetch("http://localhost:8080/ReservationListController");
                     if (!response.ok) {
                         throw new Error("Failed to fetch reservations");
                     }
@@ -90,7 +90,7 @@ export default function ReservationListPage() {
             </div>
 
             <button
-                onClick={() => router.push(`/manage/Booking/Reservation?frontendMode=${frontendMode}`)}
+                onClick={() => router.push(`/manage/Booking/ReservationPage?frontendMode=${frontendMode}`)}
                 className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition">
                 Back to Reservation Form
             </button>
