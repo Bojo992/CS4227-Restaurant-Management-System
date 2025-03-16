@@ -1,5 +1,4 @@
 {
-  "homepage": "https://bojo992.github.io/CS4227-Restaurant-Management-System",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -7,9 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "gh-pages -d out",
-    "predeploy": "npm run build"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -19,7 +16,7 @@
     "@mui/material": "^6.4.5",
     "@mui/x-data-grid": "^7.27.2",
     "@reduxjs/toolkit": "^2.6.1",
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
     "framer-motion": "^12.4.7",
     "next": "15.1.7",
     "react": "^19.0.0",
@@ -34,7 +31,6 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "gh-pages": "^6.3.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
