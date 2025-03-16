@@ -1,8 +1,7 @@
 name: GitHub Pages
 
 on:
-  push:
-#  pull_request:
+  pull_request:
     branches:
       - main
 

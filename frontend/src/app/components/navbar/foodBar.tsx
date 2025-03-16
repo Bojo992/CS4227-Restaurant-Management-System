@@ -16,12 +16,6 @@ export function NavBar() {
 
     return (
         <div className={"flex flex-row justify-between p-3 bg-gray-300"}>
-            <Button variant="contained" onClick={() => router.push('/login')}>
-                Login
-            </Button>
-            <Button variant="contained" onClick={() => router.push('/menu')}>
-                Menu
-            </Button>
             <Button variant="contained" onClick={() => router.push('/orders')}>
                 Orders
             </Button>
