@@ -1,85 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default function ReservationPage() {
-    const [refresh, setRefresh] = useState(false);
-    const [frontendMode, setFrontendMode] = useState(true);
-    const router = useRouter();
-
-    useEffect(() => {
-        const savedMode = localStorage.getItem("frontendMode");
-
-        if (savedMode === null) {
-            localStorage.setItem("frontendMode", "true");
-        } else {
-            setFrontendMode(savedMode === "true");
-        }
-    }, []);
-
-    const handleReservationAdded = (reservation: any) => {
-        if (frontendMode) {
-            storeReservationLocally(reservation);
-        }
-        setRefresh(!refresh);
-    };
-
-    const toggleFrontendMode = () => {
-        const newMode = !frontendMode;
-        setFrontendMode(newMode);
-        localStorage.setItem("frontendMode", JSON.stringify(newMode));
-    };
-
-    return (
-        <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6 relative">
-            <button
-                onClick={() => router.push("/")}
-                className="self-start mb-4 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg text-lg transition">
-                Back
-            </button>
-            <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
-                <h2 className="text-2xl font-bold mb-4 text-black">Create Reservation</h2>
-                <ReservationForm onReservationAdded={handleReservationAdded} frontendMode={frontendMode} />
-
-                <button
-                    onClick={() => router.push(`/manage/Booking/ReservationList?frontendMode=${frontendMode}`)}
-                    className="mt-4 w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-lg text-lg transition">
-                    View Reservations
-                </button>
-            </div>
-
-            {/* Checkbox is checked by default */}
-            <div className="fixed bottom-6 left-6 flex items-center space-x-2 bg-white p-2 rounded-lg shadow-md border border-gray-300">
-                <input
-                    type="checkbox"
-                    id="frontendMode"
-                    checked={frontendMode}
-                    onChange={toggleFrontendMode}
-                    className="w-5 h-5"
-                />
-                <label htmlFor="frontendMode" className="text-lg font-semibold text-black">
-                    Frontend Mode
-                </label>
-            </div>
-        </div>
-    );
+interface ReservationFormProps {
+    onReservationAdded: (reservation: any) => void;
+    frontendMode: boolean;
 }
 
-function storeReservationLocally(reservation: any) {
-    let storedReservations = JSON.parse(localStorage.getItem("frontendReservations") || "[]");
-
-    const exists = storedReservations.some(
-        (res: any) => res.customerName === reservation.customerName && res.reservationTime === reservation.reservationTime
-    );
-
-    if (!exists) {
-        storedReservations.push({ ...reservation, id: Date.now().toString() });
-        localStorage.setItem("frontendReservations", JSON.stringify(storedReservations));
-    }
-}
-
-
-function ReservationForm({ onReservationAdded, frontendMode }: { onReservationAdded: (reservation: any) => void, frontendMode: boolean }) {
+export default function ReservationForm({ onReservationAdded, frontendMode }: ReservationFormProps) {
     const [customerName, setCustomerName] = useState("");
     const [phone, setPhone] = useState("");
     const [partySize, setPartySize] = useState(1);
@@ -144,7 +71,7 @@ function ReservationForm({ onReservationAdded, frontendMode }: { onReservationAd
             showModalMessage("Reservation stored locally!", "bg-green-600");
         } else {
             try {
-                const response = await fetch("http://localhost:8080/api/reservations", {
+                const response = await fetch("http://localhost:8080/ReservationPageController", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(reservationData),
@@ -164,6 +91,19 @@ function ReservationForm({ onReservationAdded, frontendMode }: { onReservationAd
         setPartySize(1);
         setReservationTime("");
     };
+
+    function storeReservationLocally(reservation: any) {
+        let storedReservations = JSON.parse(localStorage.getItem("frontendReservations") || "[]");
+
+        const exists = storedReservations.some(
+            (res: any) => res.customerName === reservation.customerName && res.reservationTime === reservation.reservationTime
+        );
+
+        if (!exists) {
+            storedReservations.push({ ...reservation, id: Date.now().toString() });
+            localStorage.setItem("frontendReservations", JSON.stringify(storedReservations));
+        }
+    }
 
     return (
         <div>
