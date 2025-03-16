@@ -68,6 +68,8 @@ export let mock_inventory = [
      {"id":49,"name":"BBQ sauce"                                  ,current_inventory: 8680, ingredient_cost: 19.06,currency:"USD", usedIn: [{item_name: "Tacos",amount_used: 166},{item_name: "Sushi",amount_used: 84}]}
 ];
 
+export let mock_payment_history : {id: number; amount: number; date: number; GUID: string}[] = [];
+
 
 
 // function temp() {

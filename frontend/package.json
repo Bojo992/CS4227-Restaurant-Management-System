@@ -15,8 +15,10 @@
     "@heroicons/react": "^2.2.0",
     "@mui/material": "^6.4.5",
     "@mui/x-data-grid": "^7.27.2",
+    "@mui/x-date-pickers": "^7.27.3",
     "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.8.2",
+    "dayjs": "^1.11.13",
     "framer-motion": "^12.4.7",
     "next": "15.1.7",
     "react": "^19.0.0",
@@ -25,7 +27,8 @@
     "react-redux": "^9.2.0",
     "recharts": "^2.15.1",
     "redux": "^5.0.1",
-    "styled-components": "^6.1.15"
+    "styled-components": "^6.1.15",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
