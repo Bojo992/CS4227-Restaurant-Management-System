@@ -20,19 +20,19 @@ public class MenuController {
 
     @GetMapping("/add")
     public ResponseEntity<Object> addMenu(@RequestBody MenuEntity menu){
-        this.menuService.addNewMenu();
+        this.menuService.addNewMenu(menu);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/update")
-    public ResponseEntity<Object> updateMenu(){
-        this.menuService.updateMenu();
+    public ResponseEntity<Object> updateMenu(@RequestBody MenuEntity menu){
+        this.menuService.updateMenu(menu);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/delete")
-    public ResponseEntity<Object> deleteMenu(){
-        this.menuService.deleteMenu();
+    public ResponseEntity<Object> deleteMenu(@RequestBody String name){
+        this.menuService.deleteMenu(name);
         return ResponseEntity.ok().build();
     }
 }

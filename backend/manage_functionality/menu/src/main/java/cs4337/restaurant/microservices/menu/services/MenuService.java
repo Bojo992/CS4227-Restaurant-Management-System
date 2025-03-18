@@ -1,19 +1,30 @@
 package cs4337.restaurant.microservices.menu.services;
 
+import cs4337.restaurant.microservices.menu.entities.MenuEntity;
+import cs4337.restaurant.microservices.menu.repositories.MenuRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
+@AllArgsConstructor
 public class MenuService {
-    public void addNewMenu() {
+    private MenuRepository menuRepository;
+
+    public List<MenuEntity> getAllMenu(){
+        return this.menuRepository.findAll();
     }
 
-    public void updateMenu() {
+    public void addNewMenu(MenuEntity menu){
+        this.menuRepository.save(menu);
     }
 
-    public void deleteMenu() {
+    public void updateMenu(MenuEntity menu){
+        this.menuRepository.save(menu);
     }
 
-    public Object getAllMenu() {
-        return null;
+    public void deleteMenu(String name){
+        this.menuRepository.deleteById(name);
     }
 }
