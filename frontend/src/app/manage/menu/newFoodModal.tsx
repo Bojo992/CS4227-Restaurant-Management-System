@@ -11,8 +11,8 @@ export default function NewFoodModal() {
     const handleClose = () => setOpen(false);
 
     const [name, setName] = useState<string>("");
-    const [price, setPrice] = useState<string>("");
-    const [cost, setCost] = useState<string>("");
+    const [price, setPrice] = useState<number>(0.0);
+    const [cost, setCost] = useState<number>(0.0);
     const [hyperlink, setHyperlink] = useState<string>("");
 
 
@@ -20,11 +20,11 @@ export default function NewFoodModal() {
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        dispatch(addMenuItem({ name, img: hyperlink || null, price, cost, quantity: "0" }));
+        dispatch(addMenuItem({ name, img: hyperlink || null, price, cost, quantity: 0 }));
 
         setName("");
-        setPrice("");
-        setCost("");
+        setPrice(0.0);
+        setCost(0.0);
         setHyperlink("");
         handleClose();
     }
@@ -54,9 +54,9 @@ export default function NewFoodModal() {
                         <TextField fullWidth label="Name" variant="outlined" value={name}
                                    onChange={(e) => setName(e.target.value)} sx={{mt: 2}}/>
                         <TextField fullWidth label="Cost" variant="outlined" value={cost}
-                                   onChange={(e) => setCost(e.target.value)} sx={{mt: 2}}/>
+                                   onChange={(e) => setCost(Number(e.target.value))} sx={{mt: 2}}/>
                         <TextField fullWidth label="Price" variant="outlined" value={price}
-                                   onChange={(e) => setPrice(e.target.value)} sx={{mt: 2}}/>
+                                   onChange={(e) => setPrice(Number(e.target.value))} sx={{mt: 2}}/>
                         <TextField fullWidth label="Image URL" variant="outlined" value={hyperlink}
                                    onChange={(e) => setHyperlink(e.target.value)} sx={{mt: 2}}/>
 
