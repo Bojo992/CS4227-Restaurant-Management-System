@@ -1,2 +1,6 @@
 .idea
 .env
+.jar
+/backend/payment_and_inventory/analytics/target/
+/backend/payment_and_inventory/inventory/target/
+/backend/payment_and_inventory/payment/target/

@@ -1,0 +1,65 @@
+services:
+  paymentDB:
+    build:
+      context: .
+      dockerfile: paymentDB.dockerfile
+    image: mysql:latest
+    container_name: paymentDB
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: paymentDB
+    volumes:
+      - ./init/:/docker-entrypoint-initdb.d
+      - paymentDB:/var/lib/mysql
+    networks:
+      - net
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--host=localhost", "--password=1234"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+  payment_app:
+    build:
+      context: .
+      dockerfile: payment.Dockerfile
+    container_name: payment_and_inventory-payment_app
+    depends_on:
+      paymentDB:
+        condition: service_healthy
+    networks:
+      - net
+    ports:
+      - 8081:8081
+  inventory_app:
+    build:
+      context: .
+      dockerfile: inventory.Dockerfile
+    container_name: payment_and_inventory-inventory_app
+    depends_on:
+      paymentDB:
+        condition: service_healthy
+    networks:
+      - net
+    ports:
+      - 8082:8082
+  analytics_app:
+    build:
+      context: .
+      dockerfile: analytics.Dockerfile
+    container_name: payment_and_inventory-analytics_app
+    depends_on:
+      paymentDB:
+        condition: service_healthy
+    networks:
+      - net
+    ports:
+      - 8083:8083
+networks:
+  net:
+    external: true
+
+volumes:
+  paymentDB:
